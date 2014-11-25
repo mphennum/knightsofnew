@@ -19,7 +19,7 @@ CLI::title('Refresh login');
 
 // refresh recent sessions
 
-$rows = Database::read(Session::TABLE, '`expires` > NOW() AND `expires` < DATE_ADD(NOW(), INTERVAL 10 MINUTE) AND `requested` > DATE_SUB(NOW(), INTERVAL 7 DAY)');
+$rows = Database::read(Session::TABLE, '`expires` > NOW() AND `expires` < DATE_ADD(NOW(), INTERVAL 10 MINUTE) AND `requested` > DATE_SUB(NOW(), INTERVAL 1 DAY)');
 $success = 0;
 for ($i = 0, $n = count($rows); $i < $n; ++$i) {
 	$row = $rows[$i];
