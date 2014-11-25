@@ -1,0 +1,22 @@
+/* sub */
+
+.kon-sub main article h2 a {
+	font-weight: 700;
+}
+
+.kon-sub main article .kon-ts {
+	float: right;
+	margin-left: 5px;
+}
+
+.kon-sub main article p {
+	margin-bottom: 5px;
+}
+
+.kon-sub main article .kon-image {
+	width: 100%;
+}
+
+.kon-sub main article .kon-image a img {
+	width: 100%;
+}

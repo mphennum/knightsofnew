@@ -1,0 +1,56 @@
+/* votes */
+
+.kon-votes {
+	float: left;
+	width: 25px;
+	height: 33px;
+	position: relative;
+}
+
+.kon-votes button {
+	background: transparent;
+	border-top: 0;
+	border-bottom: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-radius: 0;
+	box-shadow: none;
+	display: block;
+
+	padding: 0;
+	width: 0;
+	height: 0;
+	position: absolute;
+}
+
+.kon-votes button:active {
+	margin-top: 0;
+}
+
+.kon-votes .kon-upvote {
+	border-bottom: 15px solid #CCC;
+
+	top: 0;
+}
+
+.kon-votes .kon-upvote:hover {
+	border-bottom: 15px solid #BBB;
+}
+
+.kon-votes .kon-upvote.kon-voted {
+	border-bottom: 15px solid #198CFF;
+}
+
+.kon-votes .kon-downvote {
+	border-top: 15px solid #CCC;
+
+	bottom: 0;
+}
+
+.kon-votes .kon-downvote:hover {
+	border-top: 15px solid #BBB;
+}
+
+.kon-votes .kon-downvote.kon-voted {
+	border-top: 15px solid #FFA000;
+}

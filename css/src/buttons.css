@@ -1,0 +1,33 @@
+/* buttons */
+
+button {
+	background: #EFA010;
+	border-bottom: 2px solid #CF8010;
+	border-radius: 2px;
+	box-shadow: 0 0 1px 1px #CCC;
+	color: #FFF;
+	cursor: pointer;
+
+	padding: 5px 15px 3px 15px;
+}
+
+button:hover {
+	background: #FFA000;
+	border-bottom: 2px solid #DF8000;
+}
+
+button:active {
+	background: #FFA000;
+	border-bottom: 0 solid #000;
+
+	margin-top: 2px;
+}
+
+a {
+	color: #007FFF;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}

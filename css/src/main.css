@@ -1,0 +1,38 @@
+/*
+colors:
+
+CEE3F8 - light blue
+198CFF - blue
+007FFF - dark blue
+
+FFA000 - orange gold
+B27000 - dark orange gold
+*/
+
+/* main */
+
+main {
+	display: block;
+
+	margin: 0 auto;
+	padding: 0 5px;
+	min-width: 320px;
+	max-width: 500px;
+}
+
+main article {
+	background: #FFF;
+	border-radius: 3px;
+	box-shadow: 0 0 1px 1px #E8E8E8;
+
+	margin: 10px 0 5px 0;
+	padding: 5px 5px 1px 5px;
+	width: 100%;
+}
+
+main article h2 {
+	font-size: 14px;
+	font-weight: 700;
+
+	margin-bottom: 5px;
+}

@@ -1,0 +1,40 @@
+/* dialog */
+
+.kon-dialog .kon-overlay {
+	background: rgba(0, 0, 0, 0.75);
+
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 950;
+}
+
+.kon-dialog .kon-box {
+	background: #FFF;
+	border-radius: 3px;
+	box-shadow: 0 0 1px 1px #777;
+
+	margin: 0 auto;
+	padding: 5px;
+	position: fixed;
+	z-index: 975;
+}
+
+.kon-dialog .kon-box h3 {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.kon-dialog .kon-box .kon-buttons {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+
+.kon-dialog .kon-box .kon-buttons button {
+	margin: 0 5px 5px 0;
+}
