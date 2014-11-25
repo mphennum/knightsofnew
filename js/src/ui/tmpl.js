@@ -1,12 +1,10 @@
-(function() {
+(function(KON) {
 
 'use strict';
 
-var KON = window.KON = window.KON || {};
 var UI = KON.UI = KON.UI || {};
 var Tmpl = UI.Tmpl = UI.Tmpl || {};
 
-KON.modules = KON.modules || {};
 KON.modules['UI.Tmpl'] = true;
 
 Tmpl.__init__ = function(callback) {
@@ -52,4 +50,4 @@ Tmpl.__init__ = function(callback) {
 	});
 };
 
-})();
+})(window.KON);

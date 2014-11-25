@@ -1,4 +1,4 @@
-(function() {
+(function(document) {
 
 'use strict';
 
@@ -49,7 +49,7 @@ KON.__init__ = function(opts) {
 	// cookies
 
 	var cookies = document.cookie.split('; ');
-	for (var i = 0, n = cookies.length; i < n; ++i) {
+	for (var i = 0; i < cookies.length; ++i) {
 		var parts = cookies[i].split('=');
 		if (parts[0] === 'sid') {
 			KON.sid = parts[1];
@@ -85,13 +85,13 @@ var init = function(modules, callback) {
 	};
 
 	var mods = [];
-	for (var i = 0, n = modules.length; i < n; ++i) {
+	for (var i = 0; i < modules.length; ++i) {
 		var module = modules[i];
 		complete[module] = false;
 
 		var mod = KON;
 		var parts = module.split('.');
-		for (var j = 0, l = parts.length; j < l; ++j) {
+		for (var j = 0; j < parts.length; ++j) {
 			mod = mod[parts[j]];
 		}
 
@@ -101,7 +101,7 @@ var init = function(modules, callback) {
 		});
 	}
 
-	for (var i = 0, n = mods.length; i < n; ++i) {
+	for (var i = 0; i < mods.length; ++i) {
 		var mod = mods[i];
 		mod.module.__init__(ready.bind(this, mod.name));
 	}
@@ -231,7 +231,7 @@ KON.ago = function(ts) {
 	var now = parseInt(Date.now() / 1000);
 	var ago = now - ts;
 
-	if (ago < 60) { // < 1 minute
+	if (ago < 90) { // < 1 minute
 		return '1m';
 	}
 
@@ -302,13 +302,11 @@ KON.logout = function() {
 KON.required = KON.required || {};
 
 KON.required.detect = function(callback) {
-	callback = callback || KON.noop;
-	load('Detect', callback);
+	load('Detect', callback || KON.noop);
 };
 
 KON.required.poly = function(callback) {
-	callback = callback || KON.noop;
-	load('Poly', callback);
+	load('Poly', callback || KON.noop);
 };
 
 KON.required.jq = function(callback) {
@@ -339,7 +337,7 @@ KON.__preload__ = function(callback) {
 
 	var preloads = [];
 	var scripts = document.getElementsByTagName('script');
-	for (var i = 0, n = scripts.length; i < n; ++i) {
+	for (var i = 0; i < scripts.length; ++i) {
 		var matches = scripts[i].src.match(/\/kon\.js#?(.+)?$/);
 		if (matches) {
 			preloads = matches[1] ? matches[1].split(',') : [];
@@ -366,7 +364,7 @@ KON.__preload__ = function(callback) {
 		includes.push(KON.required[k].bind(this, ready.bind(this, 'required-' + k)));
 	}
 
-	for (var i = 0, n = preloads.length; i < n; ++i) {
+	for (var i = 0; i < preloads.length; ++i) {
 		var preload = preloads[i];
 		if (KON.preload[preload]) {
 			complete['preload-' + preload] = false;
@@ -375,7 +373,7 @@ KON.__preload__ = function(callback) {
 	}
 
 	if (includes.length) {
-		for (var i = 0, n = includes.length; i < n; ++i) {
+		for (var i = 0; i < includes.length; ++i) {
 			includes[i]();
 		}
 
@@ -409,4 +407,4 @@ KON.__preload__(function() {
 	}
 });
 
-})();
+})(document);

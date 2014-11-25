@@ -1,12 +1,10 @@
-(function() {
+(function(KON) {
 
 'use strict';
 
-var KON = window.KON = window.KON || {};
 var UI = KON.UI = KON.UI || {};
 var Sub = UI.Sub = UI.Sub || {};
 
-KON.modules = KON.modules || {};
 KON.modules['UI.Sub'] = true;
 
 Sub.__init__ = function(callback) {
@@ -202,7 +200,7 @@ Sub.__init__ = function(callback) {
 			this.$play.removeClass('kon-play');
 			this.$play.addClass('kon-pause');
 
-			for (var i = 0, n = this.$paused.length; i < n; i++) {
+			for (var i = 0; i < this.$paused.length; i++) {
 				this.$paused[i].fadeIn(300);
 			}
 
@@ -217,7 +215,7 @@ Sub.__init__ = function(callback) {
 		// update
 
 		Sub.prototype.updateTS = function() {
-			for (var i = 0, n = this.$articles.length; i < n; i++) {
+			for (var i = 0; i < this.$articles.length; i++) {
 				var $article = this.$articles[i];
 				$article.children('.kon-ts').text(KON.ago($article.data('ts')));
 			}
@@ -262,4 +260,4 @@ Sub.__init__ = function(callback) {
 	});
 };
 
-})();
+})(window.KON);

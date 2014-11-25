@@ -1,12 +1,10 @@
-(function() {
+(function(KON) {
 
 'use strict';
 
-var KON = window.KON = window.KON || {};
 var UI = KON.UI = KON.UI || {};
 var Dialog = UI.Dialog = UI.Dialog || {};
 
-KON.modules = KON.modules || {};
 KON.modules['UI.Dialog'] = true;
 
 Dialog.__init__ = function(callback) {
@@ -30,7 +28,7 @@ Dialog.__init__ = function(callback) {
 			this.width = opts.width || 300;
 			this.height = opts.height || 500;
 
-			if (opts.buttons === undefined) {
+			if (!opts.buttons) {
 				this.buttons = [{
 					'text': 'close',
 					'onclick': this.hide.bind(this)
@@ -44,13 +42,13 @@ Dialog.__init__ = function(callback) {
 
 		Dialog.prototype.render = function() {
 
-			this.$ = $('<div class="kon-dialog" style="display: none"/>');
+			this.$ = $('<div class="kon-dialog" style="display: none">');
 
-			this.$overlay = $('<div class="kon-overlay"/>');
+			this.$overlay = $('<div class="kon-overlay">');
 			this.$overlay.click(this.hide.bind(this));
 			this.$.append(this.$overlay);
 
-			this.$box = $('<div class="kon-box"/>');
+			this.$box = $('<div class="kon-box">');
 			this.$box.css({
 				'margin-top': (this.height * -0.5) + 'px',
 				'margin-left': (this.width * -0.5) + 'px',
@@ -73,9 +71,9 @@ Dialog.__init__ = function(callback) {
 			}
 
 			if (this.buttons.length) {
-				this.$buttons = $('<div class="kon-buttons"/>');
+				this.$buttons = $('<div class="kon-buttons">');
 				this.$box.append(this.$buttons);
-				for (var i = 0, n = this.buttons.length; i < n; ++i) {
+				for (var i = 0; i < this.buttons.length; ++i) {
 					var button = this.buttons[i];
 					var $button = $('<button>' + button.text + '</button>');
 					$button.click((button.onclick || SB.noop).bind(this));
@@ -117,4 +115,4 @@ Dialog.__init__ = function(callback) {
 	});
 };
 
-})();
+})(window.KON);

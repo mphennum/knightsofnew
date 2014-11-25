@@ -1,11 +1,9 @@
-(function() {
+(function(KON, Number, String) {
 
 'use strict';
 
-var KON = window.KON = window.KON || {};
 var Poly = KON.Poly = KON.Poly || {};
 
-KON.modules = KON.modules || {};
 KON.modules['Poly'] = true;
 
 Poly.__init__ = function(callback) {
@@ -13,17 +11,17 @@ Poly.__init__ = function(callback) {
 
 	// Number
 
-	Number.prototype.toLowerCase = Number.prototype.toLowerCase || Number.prototype.toString;
+	Number.prototype.toLowerCase = Number.prototype.toString;
 
-	Number.prototype.toUpperCase = Number.prototype.toUpperCase || Number.prototype.toString;
+	Number.prototype.toUpperCase = Number.prototype.toString;
 
 	// String
 
-	String.prototype.ltrim = String.prototype.ltrim || String.prototype.trimLeft || function() {
+	String.prototype.ltrim = String.prototype.trimLeft || function() {
 		return this.replace(/^\s+/, '');
 	};
 
-	String.prototype.rtrim = String.prototype.rtrim || String.prototype.trimRight || function() {
+	String.prototype.rtrim = String.prototype.trimRight || function() {
 		return this.replace(/\s+$/, '');
 	};
 
@@ -31,7 +29,7 @@ Poly.__init__ = function(callback) {
 		return this.replace(/^\s+|\s+$/g, '');
 	};
 
-	String.prototype.ucwords = String.prototype.ucwords || function() {
+	String.prototype.ucwords = function() {
 		return this.replace(/\b[a-z]+\b/gi, function(s) {
 			return s.charAt(0).toUpperCase() + s.substr(1).toLowerCase();
 		});
@@ -125,7 +123,7 @@ Poly.__init__ = function(callback) {
 		{'base': 'z', 'letters': /[\u007A\u24E9\uFF5A\u017A\u1E91\u017C\u017E\u1E93\u1E95\u01B6\u0225\u0240\u2C6C\uA763]/g}
 	];
 
-	String.prototype.deaccent = String.prototype.deaccent || function() {
+	String.prototype.deaccent = function() {
 		var s = this.toString();
 		for (var i = 0, n = deaccentMap.length; i < n; i++) {
 			s = s.replace(deaccentMap[i].letters, deaccentMap[i].base);
@@ -154,7 +152,7 @@ Poly.__init__ = function(callback) {
 
 	// intended to be similar to php's date format, copy "format characters" as needed from this page:
 	// https://php.net/manual/en/function.date.php
-	Date.prototype.format = Date.prototype.format || function(format, utc) {
+	Date.prototype.format = function(format, utc) {
 		utc = utc || false;
 		format = format || 'Y-m-d H:i:s';
 
@@ -210,4 +208,4 @@ Poly.__init__ = function(callback) {
 	callback();
 };
 
-})();
+})(window.KON, Number, String);
