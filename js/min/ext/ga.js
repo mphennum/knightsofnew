@@ -1,0 +1,2 @@
+(function(){var a=window.KON=window.KON||{},c=a.Ext=a.Ext||{},d=c.GA=c.GA||{};a.modules=a.modules||{};a.modules["Ext.GA"]=!0;d.__init__=function(a){delete d.__init__;(function(a,c,d,g,b,e,f){a.GoogleAnalyticsObject=b;a[b]=a[b]||function(){(a[b].q=a[b].q||[]).push(arguments)};a[b].l=1*new Date;e=c.createElement(d);f=c.getElementsByTagName(d)[0];e.async=1;e.src=g;f.parentNode.insertBefore(e,f)})(window,document,"script","//www.google-analytics.com/analytics.js","ga");ga("create","UA-54556246-1","auto");
+ga("send","pageview");a()}})();
