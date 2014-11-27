@@ -17,7 +17,18 @@ main {
 	margin: 0 auto;
 	padding: 0 5px;
 	min-width: 320px;
-	max-width: 500px;
+	max-width: 400px;
+}
+
+main section {
+	float: left;
+	margin-left: 5px;
+	width: 100%;
+	max-width: 390px;
+}
+
+main section:first-child {
+	margin-left: 0;
 }
 
 main article {
@@ -25,7 +36,7 @@ main article {
 	border-radius: 3px;
 	box-shadow: 0 0 1px 1px #E8E8E8;
 
-	margin: 10px 0 5px 0;
+	margin: 0 0 5px 0;
 	padding: 5px 5px 1px 5px;
 	width: 100%;
 }

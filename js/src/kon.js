@@ -40,6 +40,7 @@ KON.__init__ = function(opts) {
 	opts = opts || {};
 
 	var $ = KON.$ = window.jQuery;
+	KON.$window = $(window);
 	KON.$head = $('head');
 	KON.$body = $('body');
 	KON.$header = KON.$body.children('header');

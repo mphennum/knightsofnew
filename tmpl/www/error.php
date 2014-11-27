@@ -7,7 +7,7 @@
 
 <title>Error - Knights of New</title>
 
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
 
 <meta name="description" content="reddit live feed">
 
@@ -33,13 +33,13 @@
 
 <?php include __DIR__ . '/ssi/scripts-non-blocking.php'; ?>
 <script>
-(function(window.KON) {
+(function(KON) {
 
 KON.load('UI.Tmpl', function() {
 	KON.UI.Tmpl().render();
 });
 
-})(KON);
+})(window.KON);
 </script>
 
 </body>
