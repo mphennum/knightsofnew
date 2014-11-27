@@ -20,8 +20,7 @@ header .kon-wrapper {
 
 	margin: 0 auto;
 	padding: 0 5px;
-	min-width: 320px;
-	max-width: 400px;
+	width: 100%;
 }
 
 header h1 {

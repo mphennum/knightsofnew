@@ -16,15 +16,15 @@ main {
 
 	margin: 0 auto;
 	padding: 0 5px;
-	min-width: 320px;
-	max-width: 400px;
+	width: 100%;
+	max-width: 300px;
 }
 
 main section {
 	float: left;
 	margin-left: 5px;
 	width: 100%;
-	max-width: 390px;
+	max-width: 290px;
 }
 
 main section:first-child {

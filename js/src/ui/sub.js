@@ -14,7 +14,11 @@ Sub.__init__ = function(callback) {
 		var $ = KON.$;
 		var $window = KON.$window;
 		var $main = KON.$main;
+
 		var Tmpl = UI.Tmpl;
+
+		var MAXCOLS = 6;
+		var ARTICLEWIDTH = 295;
 
 		Sub = UI.Sub = function(opts) {
 			if (!(this instanceof Sub)) {
@@ -143,7 +147,7 @@ Sub.__init__ = function(callback) {
 
 			this.$articles.unshift($article);
 
-			if (this.$articles.length > 24) {
+			if (this.$articles.length > 60) {
 				var $remove = this.$articles.pop();
 				$remove.fadeOut(300, function() {
 					$remove.remove();
@@ -218,19 +222,19 @@ Sub.__init__ = function(callback) {
 		// resize
 
 		var resize = function(width) {
-			var cols = Math.floor((width - 5) / 395);
+			var cols = Math.floor((width - 5) / ARTICLEWIDTH);
 
 			if (cols < 1) {
 				cols = 1;
-			} else if (cols > 4) {
-				cols = 4;
+			} else if (cols > MAXCOLS) {
+				cols = MAXCOLS;
 			}
 
 			if (cols === this.$sections.length) {
 				return;
 			}
 
-			var w = (cols * 395 + 5) + 'px';
+			var w = (cols * ARTICLEWIDTH + 5) + 'px';
 			KON.$header.children('.kon-wrapper').css('max-width', w);
 			$main.css('max-width', w);
 			$main.empty();
