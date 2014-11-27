@@ -34,9 +34,8 @@ Sub.__init__ = function(callback) {
 			this.since = null;
 			this.seen = {};
 			this.$sections = [];
-			this.totalArticles = 0;
+			this.showing = 0;
 			this.$articles = [];
-			this.$paused = [];
 
 			this.queue = opts.queue || [];
 
@@ -47,7 +46,7 @@ Sub.__init__ = function(callback) {
 
 		// posts
 
-		var renderPost = function(force) {
+		var renderPost = function() {
 			if (this.queue.length) {
 				this.$waiting.hide();
 			} else {
@@ -134,16 +133,19 @@ Sub.__init__ = function(callback) {
 				return false;
 			});
 
-			this.$sections[this.totalArticles++ % this.$sections.length].prepend($article);
+			var $section = this.$sections[this.showing % this.$sections.length];
+			$section.prepend($article);
 
 			setTimeout((function() {
-				if (!this.playing) {
-					this.$paused.push($article);
-					return;
+				var cols = calcCols($window.width());
+				if (++this.showing <= cols) {
+					var w = (this.showing * ARTICLEWIDTH + 5) + 'px';
+					KON.$header.children('.kon-wrapper').css('max-width', w);
+					$main.css('max-width', w);
 				}
 
 				$article.fadeIn(300);
-			}).bind(this), force ? 1 : 5 * 1000);
+			}).bind(this), 500);
 
 			this.$articles.unshift($article);
 
@@ -161,12 +163,6 @@ Sub.__init__ = function(callback) {
 			this.playing = true;
 			this.$play.removeClass('kon-play');
 			this.$play.addClass('kon-pause');
-
-			for (var i = 0; i < this.$paused.length; ++i) {
-				this.$paused[i].fadeIn(300);
-			}
-
-			this.$paused = [];
 		};
 
 		var pause = function() {
@@ -221,7 +217,7 @@ Sub.__init__ = function(callback) {
 
 		// resize
 
-		var resize = function(width) {
+		var calcCols = function(width) {
 			var cols = Math.floor((width - 5) / ARTICLEWIDTH);
 
 			if (cols < 1) {
@@ -230,13 +226,16 @@ Sub.__init__ = function(callback) {
 				cols = MAXCOLS;
 			}
 
+			return cols;
+		};
+
+		var resize = function(width) {
+			var cols = calcCols(width);
+
 			if (cols === this.$sections.length) {
 				return;
 			}
 
-			var w = (cols * ARTICLEWIDTH + 5) + 'px';
-			KON.$header.children('.kon-wrapper').css('max-width', w);
-			$main.css('max-width', w);
 			$main.empty();
 			this.$sections = [];
 			for (var i = 0; i < cols; ++i) {
@@ -245,7 +244,18 @@ Sub.__init__ = function(callback) {
 				$main.append($section);
 			}
 
-			for (var i = 0; i < this.$articles.length; ++i) {
+			var n = this.$articles.length;
+			if (!n) {
+				cols = 1;
+			} else if (n < cols) {
+				cols = n;
+			}
+
+			var w = (cols * ARTICLEWIDTH + 5) + 'px';
+			KON.$header.children('.kon-wrapper').css('max-width', w);
+			$main.css('max-width', w);
+
+			for (var i = 0; i < n; ++i) {
 				this.$sections[i % this.$sections.length].append(this.$articles[i]);
 			}
 		};
@@ -298,7 +308,6 @@ Sub.__init__ = function(callback) {
 			// render posts
 			this.$waiting = $('<p style="display: none">Waiting for more posts...</p>');
 			KON.$messages.append(this.$waiting);
-			renderPost.call(this, true);
 			renderPost.call(this);
 			setInterval(renderPost.bind(this), 5 * 1000);
 
