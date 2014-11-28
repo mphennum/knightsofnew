@@ -17,14 +17,14 @@ main {
 	margin: 0 auto;
 	padding: 0 5px;
 	width: 100%;
-	max-width: 300px;
+	max-width: 310px;
 }
 
 main section {
 	float: left;
 	margin-left: 5px;
 	width: 100%;
-	max-width: 290px;
+	max-width: 300px;
 }
 
 main section:first-child {

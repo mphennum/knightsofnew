@@ -17,6 +17,7 @@ class Session extends Row {
 		$this->fields = [
 			'id' => null,
 			'ip' => null,
+			'nsfw' => false,
 			'access' => null,
 			'refresh' => null,
 			'expires' => null,
@@ -53,6 +54,7 @@ class Session extends Row {
 	public function getAPIFields() {
 		return [
 			'id' => $this->fields['id'],
+			'nsfw' => $this->fields['nsfw'],
 			'logged-in' => $this->isLoggedIn()
 		];
 	}
@@ -60,6 +62,7 @@ class Session extends Row {
 	public function setRow($row) {
 		$this->fields['id'] = $row['id'];
 		$this->fields['ip'] = $row['ip'];
+		$this->fields['nsfw'] = $row['nsfw'];
 		$this->fields['access'] = $row['access'];
 		$this->fields['refresh'] = $row['refresh'];
 		$this->fields['expires'] = $row['expires'];

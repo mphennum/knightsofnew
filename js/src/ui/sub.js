@@ -18,7 +18,7 @@ Sub.__init__ = function(callback) {
 		var Tmpl = UI.Tmpl;
 
 		var MAXCOLS = 6;
-		var ARTICLEWIDTH = 295;
+		var ARTICLEWIDTH = 305;
 
 		Sub = UI.Sub = function(opts) {
 			if (!(this instanceof Sub)) {
