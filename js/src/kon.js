@@ -267,15 +267,17 @@ KON.oauth = function() {
 
 KON.login = function() {
 	KON.load('UI.Dialog', function() {
-		KON.UI.Dialog({
+		var Dialog = KON.UI.Dialog;
+		Dialog({
 			'title': 'Login required',
 			'content': '<p>You must login to reddit to vote.</p>',
 			'width': 200,
 			'height': 85,
+			'escapable': true,
 			'buttons': [
 				{
 					'text': 'cancel',
-					'onclick': KON.UI.Dialog.prototype.hide
+					'onclick': Dialog.prototype.hide
 				},
 				{
 					'text': 'login',

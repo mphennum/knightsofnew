@@ -37,16 +37,20 @@ Dialog.__init__ = function(callback) {
 				this.buttons = opts.buttons || [];
 			}
 
+			this.escapable = opts.escapable || false;
+
 			return this;
 		};
 
 		Dialog.prototype.render = function() {
-
 			this.$ = $('<div class="kon-dialog" style="display: none">');
 
 			this.$overlay = $('<div class="kon-overlay">');
-			this.$overlay.click(this.hide.bind(this));
 			this.$.append(this.$overlay);
+
+			if (this.escapable) {
+				this.$overlay.click(this.hide.bind(this));
+			}
 
 			this.$box = $('<div class="kon-box">');
 			this.$box.css({

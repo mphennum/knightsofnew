@@ -1,3 +1,10 @@
+<?php
+
+namespace KON;
+
+$opts = ['queue' => $response['result']['posts']];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +27,7 @@
 
 <header>
 	<div class="kon-wrapper">
-		<h1><a href="//<?= KON\Config::WWWHOST?>">Knights of New</a></h1>
+		<h1><a href="//<?= Config::WWWHOST?>">Knights of New</a></h1>
 	</div>
 </header>
 
@@ -33,7 +40,7 @@
 (function(KON) {
 
 KON.load('UI.Sub', function() {
-	KON.UI.Sub({'queue': <?= json_encode($response['result']['posts']) ?>}).render();
+	KON.UI.Sub(<?= json_encode($opts) ?>).render();
 });
 
 })(window.KON);

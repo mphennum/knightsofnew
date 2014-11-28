@@ -54,7 +54,7 @@ class Session extends Row {
 	public function getAPIFields() {
 		return [
 			'id' => $this->fields['id'],
-			'nsfw' => $this->fields['nsfw'],
+			'nsfw' => !!$this->fields['nsfw'],
 			'logged-in' => $this->isLoggedIn()
 		];
 	}

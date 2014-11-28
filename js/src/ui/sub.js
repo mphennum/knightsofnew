@@ -262,6 +262,21 @@ Sub.__init__ = function(callback) {
 
 		// render
 
+		var ready = function() {
+			// render posts
+			this.$waiting = $('<p style="display: none">Waiting for more posts...</p>');
+			KON.$messages.append(this.$waiting);
+			renderPost.call(this);
+			setInterval(renderPost.bind(this), 5 * 1000);
+
+			// fetch posts
+			fetchPosts.call(this);
+			setInterval(fetchPosts.bind(this), 60 * 1000);
+
+			// update
+			setInterval(updateTS.bind(this), 15 * 1000);
+		};
+
 		Sub.prototype.render = function() {
 			Tmpl.prototype.render.call(this);
 
@@ -305,18 +320,38 @@ Sub.__init__ = function(callback) {
 				timer = setTimeout(resize.bind(this, w), 300);
 			}).bind(this));
 
-			// render posts
-			this.$waiting = $('<p style="display: none">Waiting for more posts...</p>');
-			KON.$messages.append(this.$waiting);
-			renderPost.call(this);
-			setInterval(renderPost.bind(this), 5 * 1000);
+			var sub = this;
+			KON.request('user/get', {'sid': KON.sid}, function(resp) {
+				if (resp.status.code !== 200 || !resp.result || !resp.result.session || resp.result.session.nsfw) {
+					ready.call(sub);
+					return;
+				}
 
-			// fetch posts
-			fetchPosts.call(this);
-			setInterval(fetchPosts.bind(this), 60 * 1000);
-
-			// update
-			setInterval(updateTS.bind(this), 15 * 1000);
+				KON.load('UI.Dialog', function() {
+					KON.UI.Dialog({
+						'title': 'Knights of New',
+						'content': '<p>Welcome to Knights of New. This site is a live feed of posts from reddit. Some posts are Not Safe For Work. Are you over the age of 18?</p>',
+						'width': 300,
+						'height': 110,
+						'buttons': [
+							{
+								'text': 'No. I want to leave.',
+								'onclick': function() {
+									window.location.href = 'http://www.mphennum.com/';
+								}
+							},
+							{
+								'text': 'Yes. Please let me in!',
+								'onclick': function() {
+									this.hide();
+									ready.call(sub);
+									KON.request('user/over18', {'sid': KON.sid});
+								}
+							}
+						]
+					}).show();
+			});
+			});
 
 			return this;
 		};

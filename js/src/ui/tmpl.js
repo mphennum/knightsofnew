@@ -18,7 +18,7 @@ Tmpl.__init__ = function(callback) {
 				return new Tmpl(opts);
 			}
 
-			opts = opts || {};
+			//opts = opts || {};
 
 			return this;
 		};
