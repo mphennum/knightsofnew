@@ -270,8 +270,7 @@ Sub.__init__ = function(callback) {
 			setInterval(renderPost.bind(this), 5 * 1000);
 
 			// fetch posts
-			fetchPosts.call(this);
-			setInterval(fetchPosts.bind(this), 60 * 1000);
+			setInterval(fetchPosts.bind(this), 30 * 1000);
 
 			// update
 			setInterval(updateTS.bind(this), 15 * 1000);
@@ -350,7 +349,7 @@ Sub.__init__ = function(callback) {
 							}
 						]
 					}).show();
-			});
+				});
 			});
 
 			return this;

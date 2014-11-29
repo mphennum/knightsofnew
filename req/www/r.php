@@ -12,13 +12,13 @@ class R extends Request {
 	const TEMPLATE = 'sub';
 
 	public function handle() {
+		$pdovars = [];
 		if ($this->action === null || $this->action === 'all') {
 			$this->response->sub = 'all';
-			$rows = Database::read(Post::TABLE, '`nsfw` = 0', [], '`created` DESC', 50);
+			$where = '`nsfw` = 0';
 		} else {
 			$subs = explode('+', $this->action);
 			$where = '';
-			$pdovars = [];
 
 			for ($i = 0, $n = count($subs); $i < $n; ++$i) {
 				$where .= '`sub` = :sub' . $i . ' OR ';
@@ -28,11 +28,12 @@ class R extends Request {
 			$where = substr($where, 0, -4);
 
 			$this->response->sub = $this->action;
-			$rows = Database::read(Post::TABLE, $where, $pdovars, '`created` DESC', 10);
 		}
 
+		$rows = Database::read(Post::TABLE, $where, $pdovars, '`created` DESC', 100);
+
 		$posts = [];
-		for ($n = count($rows), $i = $n > 5 ? $n - 6 : 0; $i < $n; ++$i) {
+		for ($i = 0, $n = count($rows); $i < $n; ++$i) {
 			$post = new Post();
 			$post->setRow($rows[$i]);
 			$posts[] = $post->getAPIFields();

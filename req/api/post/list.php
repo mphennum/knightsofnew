@@ -12,11 +12,11 @@ class PostList extends Request {
 	const CACHEABLE = true;
 
 	public function handle() {
+		$pdovars = [];
 		if (!isset($this->params['sub']) || $this->params['sub'] === 'all') {
-			$rows = Database::read(Post::TABLE, '`nsfw` = 0', [], '`created` DESC', 100);
+			$where = '`nsfw` = 0';
 		} else {
 			$where = '';
-			$pdovars = [];
 			$subs = explode('+', $this->params['sub']);
 			Sub::requested($subs);
 			for ($i = 0, $n = count($subs); $i < $n; ++$i) {
@@ -25,14 +25,12 @@ class PostList extends Request {
 			}
 
 			$where = substr($where, 0, -4);
-
-			$rows = Database::read(Post::TABLE, $where, $pdovars, '`created` DESC', 100);
 		}
 
-		$posts = [];
+		$rows = Database::read(Post::TABLE, $where, $pdovars, '`created` DESC', 100);
 
+		$posts = [];
 		if (isset($this->params['since'])) {
-			$posts = [];
 			$since = $this->params['since'];
 			foreach ($rows as $row) {
 				if ($row['id'] === $this->params['since']) {
