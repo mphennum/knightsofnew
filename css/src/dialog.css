@@ -21,7 +21,7 @@
 	margin: 0 auto;
 	padding: 5px;
 	position: fixed;
-	z-index: 975;
+	z-index: 1000;
 }
 
 .kon-dialog .kon-box h3 {
