@@ -1,4 +1,4 @@
-(function(document) {
+(function(window, document) {
 
 'use strict';
 
@@ -8,7 +8,7 @@ var KON = window.KON = window.KON || {};
 
 KON.devmode = (KON.devmode !== false);
 
-KON.noop = function() {};
+var noop = KON.noop = function() {};
 
 KON.map = KON.map || {};
 KON.packages = KON.packages || {};
@@ -56,6 +56,21 @@ KON.__init__ = function(opts) {
 			KON.sid = parts[1];
 		}
 	}
+
+	// keyboard
+
+	KON.$body.keydown(function(event) {
+		var cb = downkeys[event.keyCode || event.which];
+		if (cb) {
+			cb();
+
+			if (event.preventDefault) {
+				event.preventDefault();
+			}
+
+			return false;
+		}
+	});
 };
 
 // load
@@ -71,7 +86,7 @@ KON.load = function(module, callback) {
 };
 
 var init = function(modules, callback) {
-	callback = callback || KON.noop;
+	callback = callback || noop;
 
 	var complete = {};
 	var ready = function(module) {
@@ -109,7 +124,7 @@ var init = function(modules, callback) {
 };
 
 var load = function(module, callback) {
-	callback = callback || KON.noop;
+	callback = callback || noop;
 
 	var modules = [module];
 	if (KON.map[module]) {
@@ -126,7 +141,7 @@ var load = function(module, callback) {
 };
 
 KON.loadScript = function(src, callback) {
-	callback = callback || KON.noop;
+	callback = callback || noop;
 
 	if (KON.scripts[src]) {
 		callback();
@@ -166,7 +181,7 @@ KON.loadScript = function(src, callback) {
 // request
 
 var requestXHR = function(method, url, params, callback) {
-	callback = callback || KON.noop;
+	callback = callback || noop;
 
 	var xhr = new XMLHttpRequest();
 	xhr.open(method, url, true);
@@ -183,12 +198,12 @@ var requestXHR = function(method, url, params, callback) {
 };
 
 var requestXDR = function(method, url, params, callback) {
-	callback = callback || KON.noop;
+	callback = callback || noop;
 
 	var xdr = new XDomainRequest();
-	xdr.onprogress = KON.noop; // prevents random "aborted" when the request was successful bug (IE)
-	xdr.ontimeout = KON.noop;
-	xdr.onerror = KON.noop;
+	xdr.onprogress = noop; // prevents random "aborted" when the request was successful bug (IE)
+	xdr.ontimeout = noop;
+	xdr.onerror = noop;
 	xdr.onload = function() {
 		callback(JSON.parse(xdr.responseText));
 	};
@@ -197,11 +212,11 @@ var requestXDR = function(method, url, params, callback) {
 	xdr.send();
 };
 
-KON.trueRequest = KON.noop;
+KON.trueRequest = noop;
 var request = function(uri, params, callback) {
 	uri = uri || '';
 	params = params || {};
-	callback = callback || KON.noop;
+	callback = callback || noop;
 
 	var query = [];
 	for (var k in params) {
@@ -222,6 +237,13 @@ KON.request = function(uri, params, callback) {
 		'params': params,
 		'callback': callback
 	});
+};
+
+// keyboard controls
+
+var downkeys = {};
+KON.keydown = function(key, cb) {
+	downkeys[key] = cb || noop;
 };
 
 // ago
@@ -305,15 +327,15 @@ KON.logout = function() {
 KON.required = KON.required || {};
 
 KON.required.detect = function(callback) {
-	load('Detect', callback || KON.noop);
+	load('Detect', callback || noop);
 };
 
 KON.required.poly = function(callback) {
-	load('Poly', callback || KON.noop);
+	load('Poly', callback || noop);
 };
 
 KON.required.jq = function(callback) {
-	callback = callback || KON.noop;
+	callback = callback || noop;
 
 	if (window.jQuery) {
 		callback();
@@ -328,7 +350,7 @@ KON.required.jq = function(callback) {
 KON.preload = KON.preload || {};
 
 KON.preload.ga = function(callback) {
-	callback = callback || KON.noop;
+	callback = callback || noop;
 	KON.load('Ext.GA');
 	callback();
 };
@@ -336,7 +358,7 @@ KON.preload.ga = function(callback) {
 KON.__preload__ = function(callback) {
 	delete KON.__preload__;
 
-	callback = callback || KON.noop;
+	callback = callback || noop;
 
 	var preloads = [];
 	var scripts = document.getElementsByTagName('script');
@@ -410,4 +432,4 @@ KON.__preload__(function() {
 	}
 });
 
-})(document);
+})(window, document);
