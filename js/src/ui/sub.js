@@ -319,6 +319,18 @@ Sub.__init__ = function(callback) {
 				timer = setTimeout(resize.bind(this, w), 300);
 			}).bind(this));
 
+			// keyboard controls
+
+			KON.keydown(80, (function() {
+				if (this.playing) {
+					pause.call(this);
+				} else {
+					play.call(this);
+				}
+			}).bind(this));
+
+			// nsfw check & ready
+
 			var sub = this;
 			KON.request('user/get', {'sid': KON.sid}, function(resp) {
 				if (resp.status.code !== 200 || !resp.result || !resp.result.session || resp.result.session.nsfw) {

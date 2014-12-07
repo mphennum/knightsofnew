@@ -60,6 +60,7 @@ KON.__init__ = function(opts) {
 	// keyboard
 
 	KON.$body.keydown(function(event) {
+		//console.log(event.keyCode);
 		var cb = downkeys[event.keyCode || event.which];
 		if (cb) {
 			cb();
