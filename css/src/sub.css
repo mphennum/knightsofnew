@@ -1,5 +1,19 @@
 /* sub */
 
+.kon-sub main article {
+	/*border: 1px solid #FFF;*/
+}
+
+.kon-sub main article.kon-selected {
+	background: #FFFAF0;
+	/*border: 1px dashed #FFA000;*/
+	box-shadow: 0 0 1px 1px #FFA000;
+}
+
+.kon-sub main article.kon-selected a {
+	color: #FFA000;
+}
+
 .kon-sub main article h2 a {
 	font-weight: 700;
 }
