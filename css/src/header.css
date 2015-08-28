@@ -43,6 +43,7 @@ header h1 a:hover, header h1 a:active {
 
 header button {
 	box-shadow: 0 0 1px 1px #005FDF;
+	font-weight: bold;
 }
 
 .kon-logged-in .kon-login, .kon-logged-out .kon-logout {
