@@ -28,7 +28,7 @@ abstract class Cache {
 			Memcached::OPT_SERIALIZER => Memcached::SERIALIZER_IGBINARY
 		]);
 
-		if (empty(self::$memcached->getServerList())) {
+		if (count(self::$memcached->getServerList()) === 0) {
 			foreach (Config::$cacheServers as $host) {
 				self::$memcached->addServer($host, 11211);
 			}

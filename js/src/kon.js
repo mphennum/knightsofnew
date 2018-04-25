@@ -19,13 +19,13 @@ KON.modules['KON'] = true;
 KON.scripts = KON.scripts || {};
 
 KON.urls = KON.urls || {};
-KON.urls.www = '//www.knightsofnew.com/';
-KON.urls.api = '//api.knightsofnew.com/';
-KON.urls.js = KON.urls.js || '//js.knightsofnew.com/src/';
-KON.urls.css = KON.urls.css || '//css.knightsofnew.com/src/';
+KON.urls.www = '//knightsofnew.mphennum.com/';
+KON.urls.api = '//knightsofnew-api.mphennum.com/';
+KON.urls.js = KON.urls.js || '//knightsofnew-js.mphennum.com/src/';
+KON.urls.css = KON.urls.css || '//knightsofnew-css.mphennum.com/src/';
 KON.urls.reddit = '//www.reddit.com/';
 KON.urls.oauth = 'https://ssl.reddit.com/api/v1/authorize';
-KON.urls.redirect = '//www.knightsofnew.com/login';
+KON.urls.redirect = '//knightsofnew.mphennum.com/login';
 
 KON.keys = KON.keys || {};
 KON.keys.reddit = '8MCAJKSaMNGXjQ';
