@@ -20,8 +20,8 @@ CLI::title('Fetch new reddit posts / images');
 
 CLI::subtitle('Fetching new posts');
 
-$limit = mt_rand(95, 100);
-$url = 'http://www.reddit.com/domain/i.imgur.com/new.json?limit=' . $limit;
+$limit = mt_rand(90, 100);
+$url = 'https://www.reddit.com/domain/i.imgur.com/new.json?limit=' . $limit;
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -85,7 +85,7 @@ if (empty($subs)) {
 }
 
 foreach ($subs as $name => $ignore) {
-	$url = 'http://www.reddit.com/r/' . $name . '/about.json';
+	$url = 'https://www.reddit.com/r/' . $name . '/about.json';
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

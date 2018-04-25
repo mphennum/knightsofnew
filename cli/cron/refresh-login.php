@@ -26,7 +26,7 @@ for ($i = 0, $n = count($rows); $i < $n; ++$i) {
 
 	$ch = curl_init();
 
-	curl_setopt($ch, CURLOPT_URL, 'https://ssl.reddit.com/api/v1/access_token');
+	curl_setopt($ch, CURLOPT_URL, 'https://www.reddit.com/api/v1/access_token');
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_USERPWD, Config::REDDITKEY . ':' . Config::REDDITSECRET);
 	curl_setopt($ch, CURLOPT_POST, true);

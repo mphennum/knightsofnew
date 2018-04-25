@@ -38,7 +38,7 @@ if (empty($rows)) {
 $seen = [];
 foreach ($rows as $row) {
 	$limit = mt_rand(95, 100);
-	$url = 'http://www.reddit.com/r/' . $row['name'] . '/new.json?limit=' . $limit;
+	$url = 'https://www.reddit.com/r/' . $row['name'] . '/new.json?limit=' . $limit;
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);

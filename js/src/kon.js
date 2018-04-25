@@ -24,7 +24,7 @@ KON.urls.api = '//knightsofnew-api.mphennum.com/';
 KON.urls.js = KON.urls.js || '//knightsofnew-js.mphennum.com/src/';
 KON.urls.css = KON.urls.css || '//knightsofnew-css.mphennum.com/src/';
 KON.urls.reddit = '//www.reddit.com/';
-KON.urls.oauth = 'https://ssl.reddit.com/api/v1/authorize';
+KON.urls.oauth = 'https://www.reddit.com/api/v1/authorize';
 KON.urls.redirect = '//knightsofnew.mphennum.com/login';
 
 KON.keys = KON.keys || {};
