@@ -17,15 +17,14 @@ class R extends Request {
 			$this->response->sub = 'all';
 			$where = '`nsfw` = 0';
 		} else {
+			$where = [];
 			$subs = explode('+', $this->action);
-			$where = '';
-
 			for ($i = 0, $n = count($subs); $i < $n; ++$i) {
-				$where .= '`sub` = :sub' . $i . ' OR ';
+				$where[] = '`sub` = :sub' . $i;
 				$pdovars[':sub' . $i] = $subs[$i];
 			}
 
-			$where = substr($where, 0, -4);
+			$where = implode(' OR ', $where);
 
 			$this->response->sub = $this->action;
 		}

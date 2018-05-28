@@ -16,15 +16,15 @@ class PostList extends Request {
 		if (!isset($this->params['sub']) || $this->params['sub'] === 'all') {
 			$where = '`nsfw` = 0';
 		} else {
-			$where = '';
+			$where = [];
 			$subs = explode('+', $this->params['sub']);
 			Sub::requested($subs);
 			for ($i = 0, $n = count($subs); $i < $n; ++$i) {
-				$where .= '`sub` = :sub' . $i . ' OR ';
+				$where[] = '`sub` = :sub' . $i;
 				$pdovars[':sub' . $i] = $subs[$i];
 			}
 
-			$where = substr($where, 0, -4);
+			$where = implode(' OR ', $where);
 		}
 
 		$rows = Database::read(Post::TABLE, $where, $pdovars, '`created` DESC', 100);
