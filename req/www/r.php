@@ -12,21 +12,26 @@ class R extends Request {
 	const TEMPLATE = 'sub';
 
 	public function handle() {
-		$pdovars = [];
-		if ($this->action === null || $this->action === 'all') {
+		$all = ($this->action === null || $this->action === 'all');
+		if ($all) {
 			$this->response->sub = 'all';
-			$where = '`nsfw` = 0';
+			$subs = Config::$homesubs;
 		} else {
-			$where = [];
-			$subs = explode('+', $this->action);
-			for ($i = 0, $n = count($subs); $i < $n; ++$i) {
-				$where[] = '`sub` = :sub' . $i;
-				$pdovars[':sub' . $i] = $subs[$i];
-			}
-
-			$where = implode(' OR ', $where);
-
 			$this->response->sub = $this->action;
+			$subs = explode('+', $this->action);
+		}
+
+		$where = [];
+		$pdovars = [];
+		for ($i = 0, $n = count($subs); $i < $n; ++$i) {
+			$where[] = '`sub` = :sub' . $i;
+			$pdovars[':sub' . $i] = $subs[$i];
+		}
+
+		$where = implode(' OR ', $where);
+
+		if ($all) {
+			$where .= ' AND `nsfw` = 0';
 		}
 
 		$rows = Database::read(Post::TABLE, $where, $pdovars, '`created` DESC', 100);

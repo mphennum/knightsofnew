@@ -12,19 +12,25 @@ class PostList extends Request {
 	const CACHEABLE = true;
 
 	public function handle() {
-		$pdovars = [];
-		if (!isset($this->params['sub']) || $this->params['sub'] === 'all') {
-			$where = '`nsfw` = 0';
+		$all = (!isset($this->params['sub']) || $this->params['sub'] === 'all');
+		if ($all) {
+			$subs = Config::$homesubs;
 		} else {
-			$where = [];
 			$subs = explode('+', $this->params['sub']);
-			Sub::requested($subs);
-			for ($i = 0, $n = count($subs); $i < $n; ++$i) {
-				$where[] = '`sub` = :sub' . $i;
-				$pdovars[':sub' . $i] = $subs[$i];
-			}
+		}
 
-			$where = implode(' OR ', $where);
+		$where = [];
+		$pdovars = [];
+		Sub::requested($subs);
+		for ($i = 0, $n = count($subs); $i < $n; ++$i) {
+			$where[] = '`sub` = :sub' . $i;
+			$pdovars[':sub' . $i] = $subs[$i];
+		}
+
+		$where = implode(' OR ', $where);
+
+		if ($all) {
+			$where .= '`nsfw` = 0';
 		}
 
 		$rows = Database::read(Post::TABLE, $where, $pdovars, '`created` DESC', 100);
