@@ -17,11 +17,11 @@ class PostList extends Request {
 			$subs = Config::$homesubs;
 		} else {
 			$subs = explode('+', $this->params['sub']);
+			Sub::requested($subs);
 		}
 
 		$where = [];
 		$pdovars = [];
-		Sub::requested($subs);
 		for ($i = 0, $n = count($subs); $i < $n; ++$i) {
 			$where[] = '`sub` = :sub' . $i;
 			$pdovars[':sub' . $i] = $subs[$i];
@@ -30,7 +30,7 @@ class PostList extends Request {
 		$where = implode(' OR ', $where);
 
 		if ($all) {
-			$where .= '`nsfw` = 0';
+			$where .= ' AND `nsfw` = 0';
 		}
 
 		$rows = Database::read(Post::TABLE, $where, $pdovars, '`created` DESC', 100);
