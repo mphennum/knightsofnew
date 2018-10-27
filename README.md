@@ -2,4 +2,4 @@
 
 Live stream of new image posts from reddit so users can quickly upvote / downvote.
 
-[knightsofnew.mphennum.com](http://knightsofnew.mphennum.com)
+[knightsofnew.mphennum.com](https://knightsofnew.mphennum.com)
