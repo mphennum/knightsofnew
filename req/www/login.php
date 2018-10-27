@@ -36,7 +36,7 @@ class Login extends Request {
 		curl_setopt($ch, CURLOPT_POSTFIELDS,
 			'grant_type=authorization_code' .
 			'&code=' . rawurlencode($code) .
-			'&redirect_uri=' . rawurlencode('http://knightsofnew.mphennum.com/login')
+			'&redirect_uri=' . rawurlencode('https://knightsofnew.mphennum.com/login')
 		);
 
 		$resp = curl_exec($ch);

@@ -1,1 +1,1 @@
-<?php header('Location: http://' . KON\Config::WWWHOST . '/'); ?>
+<?php header('Location: https://' . KON\Config::WWWHOST . '/'); ?>
